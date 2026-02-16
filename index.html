@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="LOGO_JUDGE.png" />
+    <title>HOME | JUDGE TSHWARELO</title>
+    <!-- Prevent zoom on mobile -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="p.cs" />
+    <meta name="description" content="Judge Tshwarelo — Software Engineer. Portfolio for product-focused web & systems engineer. Ready for interviews and production deployments." />
+  <meta name="theme-color" content="#0f172a" />
+  <title>Judge Tshwarelo — Software Engineer</title>
+
+  <!-- Tailwind via CDN (good for quick prototypes). Replace with a build pipeline for production. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      /* ===== Variables (Option B: Church Colors) ===== */
+      :root {
+        --desktop-header-bg: rgba(10, 26, 47, 0.95); /* dark blue */
+        --mobile-nav-bg: #0a1a2f; /* deep church navy */
+        --accent: #74b9ff; /* light blue highlight */
+        --text: #ffffff;
+      }
+
+      :root {
+  --bg: #0b0e13; /* page background */
+  --panel: #11161f; /* cards/nav */
+  --muted: #8b97a8; /* secondary text */
+  --text: #e7eefb; /* primary text */
+  --brand: #6aa9ff; /* accents */
+  --brand-2: #8a7dff; /* gradient accent */
+  --ok: #10b981; /* tags */
+  --warn: #f59e0b; /* tags */
+  --danger: #ef4444; /* tags */
+  --radius: 18px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --shadow-soft: 0 6px 16px rgba(0, 0, 0, 0.25);
+  --maxw: 1200px;
+}
+
+      /* ===== RESET & BASE ===== */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        /*background: #617ae0;*/
+        color: var(--text);
+        overflow-x: hidden;
+        min-height: 100vh;
+      }
+      section {
+        min-height: 100vh;
+        height: auto;
+        margin-top: 1px;
+      }
+
+      /* ===== DESKTOP HEADER ===== */
+      header {
+        width: 100%;
+        background: var(--desktop-header-bg);
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 2rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .logo img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+      .logo h1 {
+        font-size: 1.3rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--text);
+      }
+
+      nav.desktop-nav ul {
+        list-style: none;
+        display: flex;
+        gap: 25px;
+      }
+      nav.desktop-nav ul li a {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 500;
+        position: relative;
+        font-size: 1.05rem;
+      }
+      nav.desktop-nav ul li a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 2px;
+        background: var(--accent);
+        transition: width 0.25s;
+      }
+      nav.desktop-nav ul li a:hover::after {
+        width: 100%;
+      }
+
+      .menu-toggle {
+        display: none;
+        font-size: 1.8rem;
+        color: var(--text);
+        cursor: pointer;
+      }
+
+      /* ===== MOBILE SIDEBAR (hidden on desktop) ===== */
+      nav.mobile-nav {
+        display: none;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 900px) {
+        /* hide desktop header, show mobile sidebar */
+        header {
+          display: none;
+        }
+
+        nav.mobile-nav {
+          display: block;
+          position: fixed;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          width: 70px;
+          background: var(--mobile-nav-bg);
+          color: var(--text);
+          padding-top: 18px;
+          transition: width 0.3s;
+          z-index: 1000;
+          overflow: hidden;
+        }
+        nav.mobile-nav .logo {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          gap: 8px;
+          margin-bottom: 8px;
+        }
+        nav.mobile-nav .logo img {
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+          border: 2px solid var(--accent);
+        }
+
+        .menu-item {
+          width: 90%;
+          padding: 12px;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          color: var(--text);
+          text-decoration: none;
+          font-weight: 600;
+          margin: 6px auto;
+          transition:
+            background 0.2s,
+            color 0.2s;
+        }
+        .menu-item i {
+          font-size: 22px;
+        }
+        .menu-item span {
+          font-size: 0.95rem;
+        }
+
+        /* collapsed state: only icons visible */
+        nav.mobile-nav.collapsed {
+          width: 70px;
+        }
+        nav.mobile-nav.collapsed .menu-item span {
+          display: none;
+        }
+
+        /* expanded state: full width */
+        nav.mobile-nav.expanded {
+          width: 240px;
+        }
+        nav.mobile-nav.expanded .menu-item span {
+          display: inline-block;
+        }
+
+        /* toggle button */
+        .toggle-btn {
+          position: fixed;
+          top: 14px;
+          left: 14px;
+          font-size: 28px;
+          color: var(--accent);
+          z-index: 1100;
+          cursor: pointer;
+        }
+
+        main {
+          margin-left: 70px;
+          padding: 18px;
+          transition: margin-left 0.3s;
+        }
+        nav.mobile-nav.expanded ~ main {
+          margin-left: 240px;
+        }
+
+        /* show mobile-only helper menu item for toggle */
+        .menu-item.toggle-only {
+          justify-content: center;
+        }
+      }
+
+      /* smaller screens mission cards */
+      @media (max-width: 1024px) {
+        .mission-cards {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 600px) {
+        .mission-cards {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+        .about-mission h2 {
+          font-size: 2rem;
+        }
+        .about-mission p {
+          font-size: 1rem;
+        }
+      }
+
+      /* small visual helpers */
+      .active-link {
+        outline: 2px solid rgba(116, 185, 255, 0.12);
+        padding: 6px;
+        border-radius: 6px;
+      }
+
+
+      /* ===== MOBILE RESPONSIVE ===== */
+      @media (max-width: 900px) {
+        .menu-toggle {
+          display: block;
+        }
+
+        nav ul {
+          position: fixed;
+          top: 70px;
+          right: -100%;
+          background: rgba(10, 26, 47, 0.98);
+          flex-direction: column;
+          width: 280px;
+          justify-content: flex-start;
+          padding-top: 100px;
+          text-align: center;
+          transition: right 0.4s ease;
+        }
+
+        nav ul.active {
+          right: 0;
+        }
+
+        nav ul li {
+          margin: 20px 0;
+        }
+
+        .hero-container {
+          flex-direction: column;
+          width: 320px;
+          gap: 20px;
+          text-align: center;
+        }
+
+        .hero-logo {
+          width: 150px;
+          height: 150px;
+        }
+
+        .hero-logo img {
+          width: 120px;
+          height: 120px;
+        }
+
+        .hero-content {
+          width: 300px;
+        }
+
+        .hero-content h1 {
+          font-size: 24px;
+        }
+
+        .hero-content p {
+          font-size: 14px;
+        }
+
+        .chip {
+          font-size: 12px;
+          padding: 4px 8px;
+        }
+
+        .btn {
+          font-size: 12px;
+          padding: 8px 14px;
+        }
+      }
+/* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  display: flex;
+  height: 100vh;
+}
+
+.harmbugermenu {
+  display: none;
+}
+
+/* ===== MAIN CONTENT ===== *
+main {
+}
+
+section {
+  height: 100vh;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}*/
+
+section {
+  height: 100vh;
+  padding: 80px 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+      /* ===== HOME ===== */
+#home {
+  background: url("HOME_PIC.jpg") no-repeat center center/cover;
+  height: 100vh;
+}
+
+#home .content {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  margin-top: 50px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 1000px;
+}
+
+#home .content1 {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  margin-top: 50px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 400px;
+  
+}
+
+#home .content img {
+
+  width: 200px;
+  border-radius: 10%;
+  margin-bottom: 10px;
+  border: 3px solid #0a1a2f;
+  float: right;
+}
+
+#home h1 {
+  font-size: 2em;
+  margin-bottom: 15px;
+}
+
+#home p {
+  font-size: 1em;
+  line-height: 1.6;
+}
+
+/* ====== Hero ====== */
+      .statbar {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .stat {
+        background: var(--panel);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 14px;
+        padding: 14px;
+        text-align: center;
+      }
+      .stat b {
+        font-size: 18px;
+      }
+
+      .hero-media {
+        background: var(--panel);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius);
+        padding: 10px;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-media .mock {
+        aspect-ratio: 16/9;
+        border-radius: 12px;
+        background: radial-gradient(
+            1000px 400px at -10% -30%,
+            rgba(106, 169, 255, 0.25),
+            transparent 60%
+          ),
+          radial-gradient(
+            800px 400px at 110% 130%,
+            rgba(138, 125, 255, 0.25),
+            transparent 55%
+          ),
+          #0e131b;
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        color: #8fb4ff;
+      }
+      .hero-media .label {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: #0b0e13aa;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 6px 10px;
+        border-radius: 10px;
+        font-size: 12px;
+      }*/
+
+      
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+.chip {
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: #0e131b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 13px;
+  gap: 20px;
+  margin-top: 20px;
+}
+.cta {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+  color: #0b0e13;
+  font-weight: 700;
+  border: none;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+}
+.btn.ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.accent {
+  color: gold;
+}
+    </style>
+  </head>
+
+  <body>
+    <!-- MOBILE SIDEBAR (appears under 900px) -->
+    <nav
+      class="mobile-nav collapsed"
+      id="mobileNav"
+      aria-label="Mobile navigation"
+    >
+      <div class="logo">
+        <img src="LOGO_JUDGE.png" alt="Judge Logo" />
+        <small style="font-size: 12px; color: var(--accent)">JUDGE</small>
+      </div>
+
+      <!-- Toggle (inside menu for accessibility on some devices) -->
+      <a class="menu-item toggle-only" onclick="toggleExpand()" role="button">
+        <i class="bx bx-menu"></i>
+        <span>Menu</span>
+      </a>
+
+      <a class="menu-item" href="index.html">
+  <i class="bx bx-home"></i>
+  <span>Home</span>
+</a>
+
+<a class="menu-item" href="about.html">
+  <i class="bx bx-info-circle"></i>
+  <span>About</span>
+</a>
+
+<a class="menu-item" href="project.html">
+  <i class="bx bx-briefcase"></i>
+  <span>Projects</span>
+</a>
+
+<a class="menu-item" href="skills.html">
+  <i class="bx bx-bar-chart-alt-2"></i>
+  <span>Skills</span>
+</a>
+
+<a class="menu-item" href="roadmap.html">
+  <i class="bx bx-map"></i>
+  <span>Road-map</span>
+</a>
+
+<a class="menu-item" href="connect.html">
+  <i class="bx bx-phone-call"></i>
+  <span>Connect</span>
+</a>
+
+
+     
+    </nav>
+
+    <!-- DESKTOP HEADER -->
+    <header>
+      <div class="logo">
+        <img src="LOGO_JUDGE.png" alt="Church Logo" />
+        <h1>Software Dev / System Design  </h1>
+      </div>
+
+      <i class="fas fa-bars menu-toggle" id="menu-toggle"></i>
+
+      <nav class="desktop-nav">
+        <ul id="nav-links">
+          <li><a href="index.html" class="active-link">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="project.html">Projects</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="roadmap.html">Road-map</a></li>
+          <li><a href="connect.html">Connect</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- MAIN SECTION -->
+    <main>
+      <!-- HOME -->
+      <section id="home">
+        <div class="content">
+          
+
+          <p>Hi, I'm</p>
+          <h1>
+            Judge Tshwarelo —
+            <span class="accent">Computer Science × Mechatronics</span>
+          </h1>
+          <p style="margin-bottom: 20px;">
+            Robotics and embedded systems–focused software developer with a strong interest
+             in control logic, automation, and system reliability. Experienced in building
+              rule-based, state-driven simulations and embedded-style software that model 
+              real-world constraints. Passionate about robotics software, autonomous
+               systems, and cyber-physical system design.
+          </p>
+          <div class="chips">
+            <span class="chip">Software Developer</span>
+            <span class="chip">Full-Stack Web Developer</span>
+            <span class="chip">Software Engineering</span>
+            <span class="chip">Database Administrator</span>
+            <span class="chip">Backend Developer</span>
+            <span class="chip">System developer</span>
+            <span class="chip">Embedded systems/ System design </span>
+            <span class="chip">Quantum computing/ engeneering</span>
+            <span class="chip">Brain Computer Interfaces</span>
+          </div>
+
+          <div class="cta">
+            <a class="btn" href="project.html">View Projects</a>
+            <a class="btn ghost" href="connect.html">Connect</a>
+          </div>
+         
+          <div class="statbar">
+            <div class="stat">
+              <b>10+</b>
+              <div>Portfolio Projects</div>
+            </div>
+            <div class="stat">
+              <b>4</b>
+              <div>Years Roadmap</div>
+            </div>
+            <div class="stat">
+              <b>CS × Mech</b>
+              <div>Interdisciplinary</div>
+            </div>
+          </div>
+        </div>
+        <div class="content1">
+          <p><sub>Featured project</sub></p>
+          <h2 style="color: white; font-size: 25px; font-weight: bold;">Senoamadi bank -- Internal Transfer System</h2>
+          
+             <img src="Screenshot 2026-01-30 171535.png" alt="SENOAMADI" style="width: 500px;">
+             <p>Built a lightweight internal transfer engine, 
+            transaction table schemas, and robust server-side 
+            checks. Prototype includes PHP + MySQL backend and
+             responsive UI.</p>
+             <div>
+              <p>Tech</p>
+            <span class="chip">PHP</span>
+            <span class="chip">MySQL</span>
+            <span class="chip">html / CSS</span>
+            <span class="chip">JS</span>
+             </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // Desktop menu toggle (for small desktops or when you want it to collapse)
+      const desktopToggle = document.getElementById("menu-toggle");
+      const navLinks = document.getElementById("nav-links");
+      if (desktopToggle) {
+        desktopToggle.addEventListener("click", () => {
+          navLinks.classList.toggle("active");
+          desktopToggle.classList.toggle("fa-times");
+        });
+      }
+
+
+      // Mobile sidebar toggle/expand behavior
+      const mobileNav = document.getElementById("mobileNav");
+      function toggleExpand() {
+        if (!mobileNav) return;
+        mobileNav.classList.toggle("expanded");
+        mobileNav.classList.toggle("collapsed");
+      }
+
+      // Close mobile expanded when clicking outside (for better UX)
+      document.addEventListener("click", (e) => {
+        if (window.innerWidth <= 900) {
+          const target = e.target;
+          if (
+            !mobileNav.contains(target) &&
+            mobileNav.classList.contains("expanded") &&
+            !target.classList.contains("toggle-btn")
+          ) {
+            mobileNav.classList.remove("expanded");
+            mobileNav.classList.add("collapsed");
+          }
+        }
+      });
+
+      // Service worker registration (optional)
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/service-worker.js").catch(() => {});
+      }
+    </script>
+  </body>
+</html>
